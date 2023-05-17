@@ -14,8 +14,8 @@ management:
     health:
       show-details: always
 info:
-  author: Tulio L. Viglione
-  mail: tulio.l.viglione@gmail.com
+  author: Matheus Barreto
+  mail: matheuspbarreto@hotmail.com.br
 server:
-  port: ${PORT:9999}
-message: Mensagem generica
+  port: ${PORT:6699}
+message: Mensagem da configura
