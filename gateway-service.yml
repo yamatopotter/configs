@@ -1,8 +1,10 @@
 server:
-  port: ${PORT:8900}
+  port: 8080
 spring:
   cloud:
     gateway:
+      default-filters:
+        - name: LogFilter
       routes:
         - id: subscriptionRoute
           uri: lb://SUBSCRIPTION-SERVICE
