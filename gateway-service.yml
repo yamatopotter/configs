@@ -15,5 +15,5 @@ spring:
           predicates:
             - Path=/course/**
           filters:
-                - AddRequestHeader=course-request-header, custom-course-request-header
-                - AddResponseHeader=course-response-header, custom-course-response-header
+            - AddRequestHeader=course-request-header, custom-course-request-header
+            - AddResponseHeader=course-response-header, custom-course-response-header
