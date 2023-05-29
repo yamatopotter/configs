@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8090
 spring:
   cloud:
     gateway:
@@ -14,3 +14,6 @@ spring:
           uri: lb://COURSE-SERVICE
           predicates:
             - Path=/course/**
+          filters:
+                - AddRequestHeader=course-request-header, custom-course-request-header
+                - AddResponseHeader=course-response-header, custom-course-response-header
