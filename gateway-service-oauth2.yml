@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      default-filter:
+        - TokenRelay
+      routes:
+        - id: catalogoRoute
+          uri: lb://CATALOGO-SERVICE
+          predicates:
+            - Path=/catalogo/**
+        - id: filmeRoute
+          uri: lb://FILME-SERVICE
+          predicates:
+            - Path=/filme/**
