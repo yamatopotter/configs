@@ -1,2 +1,26 @@
 server:
-  port: 8089
+  port: 8098
+spring:
+  zipkin:
+    base-url: http://${ZIPKIN_URL:localhost}:9411
+  rabbitmq:
+    username: guest
+    password: guest
+    host: ${RABBIT_URL:localhost}
+    port: 5672
+  h2:
+    console:
+      enabled: true
+    datasource:
+      url: jdbc:h2:mem:filme
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      hibernate:
+        ddl-auto: create-drop
+        format_sql: true
+      show-sql: true
+queue:
+  filme: queue-filme
