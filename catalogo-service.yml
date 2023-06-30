@@ -2,81 +2,81 @@ server:
   port: 8097
 spring:
   rabbitmq:
-      username: guest
-      password: guest
-      host: ${RABBIT_URL:localhost}
-      port: 5672
-    zipkin:
-      base-url: http://${ZIPKIN_URL:localhost}:9411
-    h2:
-      console:
-        enabled: true
-      datasource:
-        url: jdbc:h2:mem:catalogo
-        driverClassName: org.h2.Driver
-        username: sa
-        password:
-      jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
-        hibernate:
-          ddl-auto: create-drop
-          format_sql: true
-        show-sql: true
-  queue:
-    filme: queue-filme
-    serie: queue-serie
-    capitulo: queue-capitulo
-    temporada: queue-temporada
-  
-  resilience4j:
-    circuitbreaker:
-      instances:
-        serie-service:
-          allowHealthIndicatorToFail: false
-          registerHealthIndicator: true
-          slidingWindowType: COUNT_BASED
-          slidingWindowSize: 2
-          failureRateThreshold: 10
-          waitDurationInOpenState: 15000
-          permittedNumberOfCallsInHalfOpenState: 3
-          automaticTransitionFromOpenToHalfOpenEnabled: true
-        movie-service:
-          allowHealthIndicatorToFail: false
-          registerHealthIndicator: true
-          slidingWindowType: COUNT_BASED
-          slidingWindowSize: 2
-          failureRateThreshold: 10
-          waitDurationInOpenState: 15000
-          permittedNumberOfCallsInHalfOpenState: 3
-          automaticTransitionFromOpenToHalfOpenEnabled: true
-    retry:
-      instances:
-        serie-service:
-          maxAttempts: 3
-          waitDuration: 100
-          retryExceptions:
-            - feign.FeignException$ServiceUnavailable
-            - feign.FeignException$InternalServerError
-            - org.springframework.web.client.HttpServerErrorException
-            - java.util.concurrent.TimeoutException
-            - java.io.IOException
-        movie-service:
-          maxAttempts: 3
-          waitDuration: 100
-          retryExceptions:
-            - feign.FeignException$ServiceUnavailable
-            - feign.FeignException$InternalServerError
-            - org.springframework.web.client.HttpServerErrorException
-            - java.util.concurrent.TimeoutException
-            - java.io.IOException
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: circuitbreakers,circuitsbreakerevents,health,info
+    username: guest
+    password: guest
+    host: ${RABBIT_URL:localhost}
+    port: 5672
+  zipkin:
+    base-url: http://${ZIPKIN_URL:localhost}:9411
+  h2:
+    console:
+      enabled: true
+    datasource:
+      url: jdbc:h2:mem:catalogo
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      hibernate:
+        ddl-auto: create-drop
+        format_sql: true
+      show-sql: true
+queue:
+  filme: queue-filme
+  serie: queue-serie
+  capitulo: queue-capitulo
+  temporada: queue-temporada
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      serie-service:
+        allowHealthIndicatorToFail: false
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 2
+        failureRateThreshold: 10
+        waitDurationInOpenState: 15000
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+      movie-service:
+        allowHealthIndicatorToFail: false
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 2
+        failureRateThreshold: 10
+        waitDurationInOpenState: 15000
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+  retry:
+    instances:
+      serie-service:
+        maxAttempts: 3
+        waitDuration: 100
+        retryExceptions:
+          - feign.FeignException$ServiceUnavailable
+          - feign.FeignException$InternalServerError
+          - org.springframework.web.client.HttpServerErrorException
+          - java.util.concurrent.TimeoutException
+          - java.io.IOException
+      movie-service:
+        maxAttempts: 3
+        waitDuration: 100
+        retryExceptions:
+          - feign.FeignException$ServiceUnavailable
+          - feign.FeignException$InternalServerError
+          - org.springframework.web.client.HttpServerErrorException
+          - java.util.concurrent.TimeoutException
+          - java.io.IOException
+management:
+  endpoints:
+    web:
+      exposure:
+        include: circuitbreakers,circuitsbreakerevents,health,info
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
     health:
-      circuitbreakers:
-        enabled: true
-    endpoint:
-      health:
-        show-details: always
+      show-details: always
