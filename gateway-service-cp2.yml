@@ -10,8 +10,8 @@ spring:
           uri: lb://CATALOGO-SERVICE
           predicates:
             - Path=/catalogo/**
-        - id: filmeRoute
-          uri: lb://FILME-SERVICE
+        - id: movieRoute
+          uri: lb://MOVIE-SERVICE
           predicates:
             - Path=/filme/**
         - id: seriesRoute
